@@ -9,9 +9,9 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class AboutManager:IAboutService
+    public class AboutManager:IGenericService<About>
     {
-        private IAboutDal _about;
+        private readonly IAboutDal _about;
 
         public AboutManager(IAboutDal about)
         {
