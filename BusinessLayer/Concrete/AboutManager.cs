@@ -9,7 +9,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class AboutManager:IGenericService<About>
+    public class AboutManager:IAboutService
     {
         private readonly IAboutDal _about;
 

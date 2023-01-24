@@ -9,7 +9,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
-    public class CategoryManager : IGenericService<Category>
+    public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _category;
 
