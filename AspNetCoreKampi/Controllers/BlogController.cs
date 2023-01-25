@@ -16,5 +16,13 @@ namespace AspNetCoreKampi.Controllers
             var result = _bm.GetBlogWithCategory();
             return View(result);
         }
+
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            if (id == null) return RedirectToAction("Index");
+            var result = _bm.GetBlogWithCategory(id);
+            return View(result);
+        }
     }
 }

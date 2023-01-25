@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Abstract;
@@ -13,10 +14,11 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfBlogDal : GenericRepository<Blog>, IBlogDal
     {
-        public List<Blog> ListCategory()
+        
+        public List<Blog> ListCategory(Expression<Func<Blog, bool>> fitter = null)
         {
             using var c = new Context();
-            return c.Blogs.Include(x => x.Category).ToList();
+            return fitter == null ? c.Blogs.Include(x => x.Category).ToList() : c.Blogs.Include(x => x.Category).Where(fitter).ToList();
         }
     }
 }

@@ -15,7 +15,7 @@
                     {
                         <div class="col-lg-4 card">
                             <a href="single.html">
-                                <img src="/images/7.jpg" class="card-img-top img-fluid" alt="">
+                                <img src="@item.Image" class="card-img-top img-fluid" style="max-height: 80%" alt="">
                             </a>
                             <div class="card-body">
                                 <ul class="blog-icons my-4">
@@ -34,13 +34,12 @@
                                             <i class="fas fa-eye"></i> @item.Category.Name
                                         </a>
                                     </li>
-
                                 </ul>
                                 <h5 class="card-title">
-                                    <a href="single.html">@item.Title</a>
+                                    <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
                                 </h5>
-                                <p class="card-text mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt.. </p>
-                                <a href="single.html" class="btn btn-primary read-m">Daha fazla oku</a>
+                                <p class="card-text mb-3">@(item.Content.Length > 150 ? item.Content.Substring(0, item.Content.Substring(0,155).LastIndexOf(" ", StringComparison.Ordinal))+"..." : item.Content +"...") </p>
+                                <a class="btn btn-outline-primary read-m" asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id">Daha fazla oku</a>
                             </div>
                         </div>
                     }
