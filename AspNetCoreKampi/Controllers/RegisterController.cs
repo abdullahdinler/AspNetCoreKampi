@@ -5,16 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 
 namespace AspNetCoreKampi.Controllers
 {
-    public class CommentController : Controller
+    public class RegisterController : Controller
     {
-        private readonly CommentManager _cm = new(new EfCommentDal());
+        private readonly AuthorManager _ahm = new AuthorManager(new EfAuthorDal());
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(Author entity)
+        {
+            return View();
+        }
     }
 }

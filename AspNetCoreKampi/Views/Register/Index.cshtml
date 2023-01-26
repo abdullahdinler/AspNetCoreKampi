@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Yzar Kayıt Sayfası</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                <form action="#" method="post">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">İsim</label>
+
+                            <input type="text" class="form-control" name="Name" id="validationDefault01" placeholder="" required="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Mail</label>
+                            <input type="text" class="form-control" name="Mail" id="validationDefault02" placeholder="" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1 mb-2">Şifre</label>
+                            <input type="password" class="form-control" name="Password" id="password1" placeholder="" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Görsel</label>
+                            <input type="password" class="form-control" name="Image" id="Image" placeholder="" required="">
+                        </div>
+								
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1 mb-2">Hakkımda</label>
+                            <textarea class="form-control" name="About" rows="6" cols="50" placeholder="" required=""> </textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
+                    <p>
+                        <a href="#">Kaydol'a tıklayarak, şartlarınızı kabul ediyorum</a>
+                    </p>
+                </form>
+		
+            </div>
+        </div>
+    </div>
+</section>
+
