@@ -1,0 +1,50 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    $(document).ready(function () {
+        $("#form-register").click(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/NewsLatter/Index',
+                data: formData,
+                success: function (result) {
+                    if (result.isValid) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Kayıt Başarılı!',
+                            text: 'Kaydınız için teşekkür ederiz.',
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata!',
+                            text: result.errorMessage,
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata!',
+                        text: 'Bir hata oluştu.',
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<div class="tech-btm">
+    <img src="/images/banner1.jpg" class="img-fluid" alt="">
+</div>
+<div class="tech-btm">
+    <h4>Bültenimize üye olun</h4>
+    <p>Yeni yazılardan haberdar olmak için abone ol</p>
+    <form method="post">
+        <input type="email" name="Mail" placeholder="Email" required="">
+        <input id="form-register" style="background-color: red" class="btn-outline-danger" type="submit" value="Abone Ol">
+    </form>
+</div>
+

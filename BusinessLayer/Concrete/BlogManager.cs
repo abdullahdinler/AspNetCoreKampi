@@ -28,6 +28,11 @@ namespace BusinessLayer.Concrete
             _blog.Delete(entity);
         }
 
+        public List<Blog> GetBlogWithAuthor(int id)
+        {
+            return _blog.List(x => x.AuthorId == id);
+        }
+
         public List<Blog> GetBlogWithCategory(int? id)
         {
             return _blog.ListCategory(x=>x.Id == id);

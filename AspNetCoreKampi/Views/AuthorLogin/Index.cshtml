@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Yazar Giriş Sayfası</h3>
+        <div class="row inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                <form asp-controller="AuthorLogin" asp-action="Index" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1 mb-2">Email adresi</label>
+                        <input type="email" class="form-control" name="Mail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
+                        <small id="emailHelp" class="form-text text-muted">E-postanızı asla başka kimseyle paylaşmayacağız.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1 mb-2">Şifre</label>
+                        <input type="password" class="form-control" name="Password" id="exampleInputPassword1" placeholder="" required="">
+                    </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Beni hatırla</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Giriş Yap</button>
+                    <p><a href="/Register/index"> Hesabın yok mu?</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

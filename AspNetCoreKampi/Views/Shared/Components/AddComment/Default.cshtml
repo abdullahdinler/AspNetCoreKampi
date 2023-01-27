@@ -2,13 +2,11 @@
 <div class="comment-top">
     <h4>Yorum yap</h4>
     <div class="comment-bottom">
-        <form action="#" method="post">
-            <input class="form-control" type="text" name="Name" placeholder="İsim" required="">
-            <input class="form-control" type="email" name="Email" placeholder="Email" required="">
-
-            <input class="form-control" type="text" name="Subject" placeholder="Başlık" required="">
-
-            <textarea class="form-control" name="Message" placeholder="Mesajınız..." required=""></textarea>
+        <form asp-controller="Comment" asp-action="CommentAdd" method="post">
+            <input class="form-control" type="text" name="UserName" placeholder="İsim" required="">
+            @*<input class="form-control" type="email" name="Mail" placeholder="Email" required="">*@
+            <input class="form-control" type="text" name="Title" placeholder="Başlık" required="">
+            <textarea class="form-control" name="Content" placeholder="Mesajınız..." required=""></textarea>
             <button type="submit" class="btn btn-outline-primary submit">Gönder</button>
         </form>
     </div>

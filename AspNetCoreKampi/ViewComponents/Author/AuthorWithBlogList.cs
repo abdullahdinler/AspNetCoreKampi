@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
-using EntityLayer.Concrete;
-namespace AspNetCoreKampi.ViewComponents.Comment
+
+namespace AspNetCoreKampi.ViewComponents.Author
 {
-    public class AddComment:ViewComponent
+    public class AuthorWithBlogList : ViewComponent
     {
-        [HttpGet]
+        private readonly BlogManager _bm = new BlogManager(new EfBlogDal());
+
         public IViewComponentResult Invoke()
         {
-            return View();
+            var result = _bm.GetBlogWithAuthor(3);
+            return View(result);
         }
-
     }
 }
