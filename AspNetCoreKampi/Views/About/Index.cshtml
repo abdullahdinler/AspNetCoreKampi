@@ -1,0 +1,77 @@
+﻿@model EntityLayer.Concrete.About
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Hakkımızda </h3>
+        <div class="row inner-sec">
+            <!--left-->
+            <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                <div class="blog-grid-top">
+
+                    <div class="blog_info_left_grid">
+                        <a href="single.html">
+                            <img src="@Model.Image1" class="img-fluid" alt="">
+                        </a>
+                    </div>
+                    <h3>
+                        Misyonumuz & Hedeflerimiz
+                    </h3>
+                    <p>@Model.Details1</p>
+                    <p>@Model.Details2</p>
+                </div>
+            </div>
+            <!--//left-->
+            <!--right-->
+            <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+                <div class="right-blog-info text-left">
+                    <partial name="/Views/NewsLatter/index.cshtml" />
+                    <div class="tech-btm widget_social">
+                        <h4>Sosyal Medya Hesaplarımız</h4>
+                        <ul>
+
+                            <li>
+                                <a class="twitter" href="#">
+                                    <i class="fab fa-twitter"></i>
+                                    <span class="count">317K</span> Twitter Followers
+                                </a>
+                            </li>
+                            <li>
+                                <a class="facebook" href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                    <span class="count">218k</span> Twitter Followers
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dribble" href="#">
+                                    <i class="fab fa-dribbble"></i>
+
+                                    <span class="count">215k</span> Dribble Followers
+                                </a>
+                            </li>
+                            <li>
+                                <a class="pin" href="#">
+                                    <i class="fab fa-pinterest"></i>
+                                    <span class="count">190k</span> Pinterest Followers
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="tech-btm">
+                        <h4>Son Yazılar</h4>
+                        @await Component.InvokeAsync("AuthorWithBlogList")
+                    </div>
+                </div>
+
+            </aside>
+            <!--//right-->
+            <iframe src="@Model.MapLocation"  height="450" style="border:0; width:100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
