@@ -10,6 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IAuthorService
     {
         List<Author> GetList();
+        Author AuthorLogin(string mail,string password);
         Author GetById(int id);
         void Add(Author entity);
         void Delete(Author entity);

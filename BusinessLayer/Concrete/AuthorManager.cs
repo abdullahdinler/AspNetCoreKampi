@@ -23,6 +23,12 @@ namespace BusinessLayer.Concrete
             _author.Add(entity);
         }
 
+        public Author AuthorLogin(string mail , string password)
+        {
+            var result = _author.List(x => x.Mail == mail && x.Password == password).FirstOrDefault();
+            return result;
+        }
+
         public void Delete(Author entity)
         {
             _author.Delete(entity);
