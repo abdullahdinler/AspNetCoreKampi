@@ -53,6 +53,11 @@ namespace BusinessLayer.Concrete
             return _blog.List();
         }
 
+        public List<Blog> GetLastList()
+        {
+            return _blog.List().TakeLast(3).ToList();
+        }
+
         public List<Blog> GetList(int id)
         {
             return _blog.List(x => x.Id == id);

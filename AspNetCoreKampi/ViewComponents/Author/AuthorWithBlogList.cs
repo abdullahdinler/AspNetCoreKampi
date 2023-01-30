@@ -14,7 +14,7 @@ namespace AspNetCoreKampi.ViewComponents.Author
 
         public IViewComponentResult Invoke()
         {
-            var result = _bm.GetList();
+            var result = _bm.GetBlogWithAuthor(3);
             return View(result);
         }
     }
