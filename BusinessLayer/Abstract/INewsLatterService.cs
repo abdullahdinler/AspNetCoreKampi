@@ -7,8 +7,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface INewsLatterService
+    public interface INewsLatterService:IGenericService<NewsLetter>
     {
-        void Add(NewsLetter entity);
     }
 }

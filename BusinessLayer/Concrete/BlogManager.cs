@@ -30,7 +30,7 @@ namespace BusinessLayer.Concrete
 
         public List<Blog> GetBlogWithAuthor(int id)
         {
-            return _blog.List(x => x.AuthorId == id);
+            return _blog.ListCategory(x=>x.AuthorId == id);
         }
 
         public List<Blog> GetBlogWithCategory(int? id)
@@ -43,6 +43,7 @@ namespace BusinessLayer.Concrete
             return _blog.ListCategory();
         }
 
+        
         public Blog GetById(int id)
         {
             return _blog.GetById(x => x.Id == id);

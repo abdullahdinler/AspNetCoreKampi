@@ -14,11 +14,13 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfBlogDal : GenericRepository<Blog>, IBlogDal
     {
-        
+
         public List<Blog> ListCategory(Expression<Func<Blog, bool>> fitter = null)
         {
             using var c = new Context();
             return fitter == null ? c.Blogs.Include(x => x.Category).ToList() : c.Blogs.Include(x => x.Category).Where(fitter).ToList();
+
+
         }
     }
 }

@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _contact = contact;
         }
 
+        public Contact GetById(int id)
+        {
+            return _contact.GetById(x => x.Id == id);
+        }
+
         public void Add(Contact entity)
         {
             _contact.Add(entity);
@@ -31,6 +36,11 @@ namespace BusinessLayer.Concrete
         public List<Contact> GetList()
         {
             return _contact.List();
+        }
+
+        public List<Contact> GetList(int id)
+        {
+            return _contact.List(x => x.Id == id);
         }
 
         public void Update(Contact entity)

@@ -7,11 +7,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IContactService
+    public interface IContactService:IGenericService<Contact>
     {
-        List<Contact> GetList();
-        void Add(Contact entity);
-        void Delete(Contact entity);
-        void Update(Contact entity);
     }
 }

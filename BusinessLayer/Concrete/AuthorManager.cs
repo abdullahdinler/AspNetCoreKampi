@@ -34,6 +34,11 @@ namespace BusinessLayer.Concrete
             _author.Delete(entity);
         }
 
+        public List<Author> GetList(int id)
+        {
+            return _author.List(x => x.Id == id);
+        }
+
         public Author GetById(int id)
         {
             return _author.GetById(x => x.Id == id);

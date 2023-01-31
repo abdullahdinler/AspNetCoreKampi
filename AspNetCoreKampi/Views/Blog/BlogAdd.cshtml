@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Blog Ekleme</h4>
+            <p class="card-description">  </p>
+            <form asp-controller="Blog" asp-action="BlogAdd" class="forms-sample">
+                <div class="form-group">
+                    <label for="exampleInputName1">Başlık</label>
+                    <input type="text" asp-for="Title" class="form-control" id="exampleInputName1" placeholder="Başlık">
+                    @Html.ValidationMessageFor(x=>x.Title,"",new{@style="color: red"})
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Kücük Resim</label>
+                    <input type="text" asp-for="ThumbnailImage" class="form-control" id="exampleInputEmail3" placeholder="Kücük Resim">
+                    @Html.ValidationMessageFor(x => x.ThumbnailImage, "", new { @style = "color: red" })
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Büyük Resim</label>
+                    <input type="text" asp-for="Image" class="form-control" id="exampleInputPassword4" placeholder="Büyük Resim">
+                    @Html.ValidationMessageFor(x => x.Image, "", new { @style = "color: red" })
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleSelectGender">Kategori Seç</label>
+                    @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.category, new{@class="form-control" , @id = "exampleSelectGender" })
+                </div>
+
+                @*<div class="form-group">
+                    <label>File upload</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-gradient-primary" type="button">Upload</button>
+                        </span>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                <label for="exampleTextarea1">Blog İcerik</label>
+                <textarea class="form-control" asp-for="Content" id="exampleTextarea1" rows="10"></textarea>
+                @Html.ValidationMessageFor(x => x.Content, "", new { @style = "color: red" })
+
+            </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Oluştur</button>
+            </form>
+        </div>
+    </div>
+</div>
+

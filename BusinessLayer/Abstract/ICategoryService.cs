@@ -7,13 +7,7 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface ICategoryService
+    public interface ICategoryService:IGenericService<Category>
     {
-        List<Category> GetList();
-        List<Category> GetList(int id);
-        Category GetById(int id);
-        void Add(Category entity);
-        void Delete(Category entity);
-        void Update(Category entity);
     }
 }

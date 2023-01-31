@@ -23,5 +23,30 @@ namespace BusinessLayer.Concrete
             entity.Status = true;
             _nld.Add(entity);
         }
+
+        public void Delete(NewsLetter entity)
+        {
+            _nld.Delete(entity);
+        }
+
+        public NewsLetter GetById(int id)
+        {
+            return _nld.GetById(x => x.Id == id);
+        }
+
+        public List<NewsLetter> GetList()
+        {
+            return _nld.List();
+        }
+
+        public List<NewsLetter> GetList(int id)
+        {
+            return _nld.List(x => x.Id == id);
+        }
+
+        public void Update(NewsLetter entity)
+        {
+            _nld.Update(entity);
+        }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "BlogListByAuthor";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+@if (@TempData["Alert"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Alert"]
+    </div>
+}
+
+
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                Bloglarım
+            </h4>
+            <div class="text-right">
+                <a class="btn btn-outline-success " href="/Blog/BlogAdd/">New Blog</a>
+            </div>
+            <p class="card-description">
+            </p>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Delet</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+                            <td> @item.CreateDate.ToString("d")</td>
+                            <td>@item.Category.Name</td>
+
+                            @if (@item.Status)
+                            {
+                                <td><a class="btn btn-outline-success" href="/Blog/Status/@item.Id">Aktif</a></td>
+                            }
+                            else
+                            {
+                                <td><a class="btn btn-outline-danger" href="/Blog/Status/@item.Id">Pasif</a></td>
+                            }
+                            <td><a class="btn btn-outline-danger" href="">Delet</a></td>
+                            <td><a class="btn btn-outline-warning" href="">Edit</a></td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
