@@ -51,12 +51,15 @@ namespace AspNetCoreKampi.Controllers
         [HttpGet]
         public IActionResult BlogAdd()
         {
+
+            // Burada kategory listesi cekildi ve cekilen catgory listesi viewbag verildi
             List<SelectListItem> categoryList = (from item in _cm.GetList()
                 select new SelectListItem
                 {
                     Text = item.Name,
                     Value = item.Id.ToString()
                 }).ToList();
+             
             ViewBag.category = categoryList;
             return View();
         }
@@ -65,11 +68,23 @@ namespace AspNetCoreKampi.Controllers
         public IActionResult BlogAdd(Blog entity)
         {
             _vr = _bv.Validate(entity);
+
+            List<SelectListItem> categoryList = (from item in _cm.GetList()
+                select new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                }).ToList();
+
+            ViewBag.category = categoryList;
+
             if (_vr.IsValid)
             {
                 entity.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 entity.AuthorId = 3;
                 entity.Status = true;
+
+                // Ekleme işlemi yapıldığı zaman Tempdata ya mesaj verildi
                 TempData["Alert"] = "Blog başarılı bir şekilde oluşturuldu.";
                 _bm.Add(entity);
                 return RedirectToAction("BlogListByAuthor", "Blog");
@@ -90,6 +105,63 @@ namespace AspNetCoreKampi.Controllers
             entity.Status = !entity.Status;
             _bm.Update(entity);
             return RedirectToAction("BlogListByAuthor", "Blog");
+        }
+
+
+        public IActionResult Delete(int id)
+        {
+            var entity = _bm.GetById(id);
+            _bm.Delete(entity);
+            return RedirectToAction("BlogListByAuthor");
+        }
+
+
+        [HttpGet]
+        public IActionResult BlogUpdate(int id)
+        {
+            List<SelectListItem> categoryList = (from item in _cm.GetList()
+                select new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                }).ToList();
+            ViewBag.category = categoryList;
+
+            var entity = _bm.GetById(id);
+
+            return View(entity);
+        }
+
+        [HttpPost]
+        public IActionResult BlogUpdate(Blog entity)
+        {
+            List<SelectListItem> categoryList = (from item in _cm.GetList()
+                select new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                }).ToList();
+
+            ViewBag.category = categoryList;
+
+            _vr = _bv.Validate(entity);
+            if (_vr.IsValid)
+            {
+                entity.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                entity.AuthorId = 3;
+                entity.Status = true;
+                TempData["Alert"] = "Blog başarılı bir şekilde güncellendi.";
+                _bm.Update(entity);
+                return RedirectToAction("BlogListByAuthor", "Blog");
+            }
+            else
+            {
+                foreach (var error in _vr.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
+            return View();
         }
     }
 }

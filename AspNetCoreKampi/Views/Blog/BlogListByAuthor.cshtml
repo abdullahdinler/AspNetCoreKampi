@@ -4,11 +4,13 @@
     Layout = "~/Views/Shared/_AuthorLayout.cshtml";
 }
 
+
 @if (@TempData["Alert"] != null)
 {
-    <div class="alert alert-success">
-        @TempData["Alert"]
-    </div>
+    // Ekleme ve güncelleme işlemi için alert
+    <script type="text/javascript">
+        swal.fire("İşem Başarılı", "@TempData["Alert"]", "success");
+    </script>
 }
 
 
@@ -29,7 +31,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Title</th>
-                        <th>Date</th>
+                        <th class="text-center">Date</th>
                         <th>Category</th>
                         <th>Status</th>
                         <th>Delet</th>
@@ -42,7 +44,7 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Title</td>
-                            <td> @item.CreateDate.ToString("d")</td>
+                            <td> @item.CreateDate.ToString("dd MMMM yyyy")</td>
                             <td>@item.Category.Name</td>
 
                             @if (@item.Status)
@@ -53,8 +55,8 @@
                             {
                                 <td><a class="btn btn-outline-danger" href="/Blog/Status/@item.Id">Pasif</a></td>
                             }
-                            <td><a class="btn btn-outline-danger" href="">Delet</a></td>
-                            <td><a class="btn btn-outline-warning" href="">Edit</a></td>
+                            <td><a class="btn btn-outline-youtube " href="@Url.Action("Delete", "Blog", new { id = @item.Id })">Delet</a></td>
+                            <td><a class="btn btn-outline-warning" href="@Url.Action("BlogUpdate", "Blog", new { id = @item.Id })">Edit</a></td>
                         </tr>
                     }
 
@@ -65,3 +67,38 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    // sweetalert delete
+    $('.btn-outline-youtube').on('click', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        Swal.fire({
+            title: 'Bloğu silmek istediğinizden emin misiniz?',
+            text: "Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, sil!',
+            cancelButtonText: 'Vazgeç'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    success: function (result) {
+                        if (result) {
+                            Swal.fire(
+                                'Silindi!',
+                                'Blog başarıyla silindi.',
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
