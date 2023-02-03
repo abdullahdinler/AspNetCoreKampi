@@ -33,6 +33,11 @@ namespace BusinessLayer.Concrete
             return _blog.ListCategory(x=>x.AuthorId == id);
         }
 
+        public int TotalBlog()
+        {
+            return _blog.List().Count();
+        }
+
         public List<Blog> GetBlogWithCategory(int? id)
         {
             return _blog.ListCategory(x=>x.Id == id);
@@ -54,10 +59,10 @@ namespace BusinessLayer.Concrete
             return _blog.List();
         }
 
-        public List<Blog> GetLastList()
-        {
-            return _blog.List().TakeLast(3).ToList();
-        }
+        //public List<Blog> GetLastList()
+        //{
+        //    return _blog.List().TakeLast(3).ToList();
+        //}
 
         public List<Blog> GetList(int id)
         {
@@ -67,6 +72,11 @@ namespace BusinessLayer.Concrete
         public void Update(Blog entity)
         {
             _blog.Update(entity);
+        }
+
+        public int AuthorTotalBlog(int id)
+        {
+            return _blog.List(x => x.AuthorId == id).Count();
         }
     }
 }

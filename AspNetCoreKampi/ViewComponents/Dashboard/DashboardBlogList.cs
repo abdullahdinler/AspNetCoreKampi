@@ -13,7 +13,7 @@ namespace AspNetCoreKampi.ViewComponents.Dashboard
         private readonly BlogManager _bm = new BlogManager(new EfBlogDal());
         public IViewComponentResult Invoke()
         {
-            var blogList = _bm.GetBlogWithCategory().OrderByDescending(x => x.Id).Take(5).ToList();
+            var blogList = _bm.GetBlogWithCategory().Where(x=>x.AuthorId == 3).OrderByDescending(x => x.Id).Take(5).ToList();
             return View(blogList);
         }
     }

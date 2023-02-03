@@ -47,5 +47,10 @@ namespace BusinessLayer.Concrete
         {
             _category.Update(entity);
         }
+
+        public int TotalCategory()
+        {
+            return _category.List().Count();
+        }
     }
 }

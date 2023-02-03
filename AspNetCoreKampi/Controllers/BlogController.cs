@@ -36,11 +36,11 @@ namespace AspNetCoreKampi.Controllers
             return View(result);
         }
 
-        public PartialViewResult Last3Posts()
-        {
-            var result = _bm.GetLastList();
-            return PartialView(result);
-        }
+        //public PartialViewResult Last3Posts()
+        //{
+        //    var result = _bm.GetLastList();
+        //    return PartialView(result);
+        //}
         
         public IActionResult BlogListByAuthor()
         {
