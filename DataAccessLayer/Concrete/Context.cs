@@ -16,6 +16,27 @@ namespace DataAccessLayer.Concrete
                 @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AspNetCoreKampDB;Integrated Security=True");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Team ve Match sınıfı arasındaki ilişkiyi belirler
+            modelBuilder.Entity<Match>().HasOne(x => x.HomeTeam).WithMany(y => y.HomeMatches).HasForeignKey(z=>z.HomeTeamId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Match>().HasOne(x => x.GuestTeam).WithMany(y => y.AwayMatches)
+                .HasForeignKey(z => z.GuestTeamId).OnDelete(DeleteBehavior.ClientSetNull);
+
+
+
+
+            // MessageTwo ve Author sınıfı arasındaki ilişkiyi belirler.
+            modelBuilder.Entity<MessageTwo>().HasOne(x => x.SenderUser).WithMany(y => y.AuthorSender)
+                .HasForeignKey(z => z.SenderId).OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<MessageTwo>().HasOne(x => x.ReceiverUser).WithMany(z => z.AuthorReceiver)
+                .HasForeignKey(y => y.ReceiverId).OnDelete(DeleteBehavior.ClientSetNull);
+        }
+
+
         public DbSet<About> Abouts { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Blog> Blogs { get; set; }
@@ -26,5 +47,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<BlogRayting> BlogRaytings { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Match> Matches { get; set; }
+        public DbSet<MessageTwo> MessageTwos { get; set; }
     }
 }

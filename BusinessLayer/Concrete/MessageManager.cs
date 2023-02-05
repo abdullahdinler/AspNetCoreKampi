@@ -18,39 +18,40 @@ namespace BusinessLayer.Concrete
             _message = message;
         }
 
-        public List<Message> GetList()
+        public List<MessageTwo> GetList()
         {
             return _message.List();
         }
 
-        public List<Message> GetList(int id)
+        public List<MessageTwo> GetList(int id)
         {
             return _message.List(x => x.Id == id);
         }
 
-        public Message GetById(int id)
+        public MessageTwo GetById(int id)
         {
             return _message.GetById(x => x.Id == id);
         }
 
-        public void Add(Message entity)
+        public void Add(MessageTwo entity)
         {
             _message.Add(entity);
         }
 
-        public void Delete(Message entity)
+        public void Delete(MessageTwo entity)
         {
             _message.Delete(entity);
         }
 
-        public void Update(Message entity)
+        public void Update(MessageTwo entity)
         {
             _message.Update(entity);
         }
 
-        public List<Message> GetByAuthorMessage(string p)
+        public List<MessageTwo> GetByAuthorMessage(int id)
         {
-            return _message.List(x => x.Receiver == p);
+            return _message.GetListByAuthorMessage(id);
         }
+
     }
 }

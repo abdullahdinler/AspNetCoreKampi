@@ -13,8 +13,8 @@ namespace AspNetCoreKampi.ViewComponents.Author
         private readonly MessageManager _message = new MessageManager(new EfMessageDal());
         public IViewComponentResult Invoke()
         {
-            var p = "hakan@babus.com";
-            var values = _message.GetByAuthorMessage(p);
+            const int id = 3;
+            var values = _message.GetByAuthorMessage(id);
             return View(values);
         }
     }

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Notification>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Bildirim İçerik</th>
+                <th scope="col">Tarih</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.NotificationDetail</td>
+                    <td>@item.NotificationDateTime.ToString("g")</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+

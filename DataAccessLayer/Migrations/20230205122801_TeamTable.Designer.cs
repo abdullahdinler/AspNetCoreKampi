@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230205122801_TeamTable")]
+    partial class TeamTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,40 +286,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.MessageTwo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Detail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("MessageDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("MessageTwos");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.NewsLetter", b =>
                 {
                     b.Property<int>("Id")
@@ -426,27 +394,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("HomeTeam");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.MessageTwo", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Author", "ReceiverUser")
-                        .WithMany("AuthorReceiver")
-                        .HasForeignKey("ReceiverId");
-
-                    b.HasOne("EntityLayer.Concrete.Author", "SenderUser")
-                        .WithMany("AuthorSender")
-                        .HasForeignKey("SenderId");
-
-                    b.Navigation("ReceiverUser");
-
-                    b.Navigation("SenderUser");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Author", b =>
                 {
-                    b.Navigation("AuthorReceiver");
-
-                    b.Navigation("AuthorSender");
-
                     b.Navigation("Blogs");
                 });
 

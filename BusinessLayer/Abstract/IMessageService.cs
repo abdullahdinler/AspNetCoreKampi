@@ -7,8 +7,8 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IMessageService: IGenericService<Message>
+    public interface IMessageService: IGenericService<MessageTwo>
     {
-        List<Message> GetByAuthorMessage(string p);
+        List<MessageTwo> GetByAuthorMessage(int id);
     }
 }

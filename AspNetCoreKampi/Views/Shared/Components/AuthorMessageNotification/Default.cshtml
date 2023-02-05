@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Message>
+﻿@model IEnumerable<MessageTwo>
 
 
 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -12,10 +12,10 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
-                <img src="~/AuthorPanel/assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                <img src="@item.SenderUser.Image" alt="image" class="profile-pic">
             </div>
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                <h6 class="ellipsis mb-1 font-weight-normal">@item.Sender.Substring(0,5)'tan yeni bir mesajın var.</h6>
+                <h6 class="ellipsis mb-1 font-weight-normal">@item.SenderUser.Name'tan yeni bir mesajın var.</h6>
                 <p class="text-gray mb-0"> @item.MessageDateTime.ToString("M") </p>
             </div>
         </a>
