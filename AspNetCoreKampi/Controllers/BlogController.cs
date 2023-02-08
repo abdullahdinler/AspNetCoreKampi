@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreKampi.Models;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
@@ -44,16 +45,23 @@ namespace AspNetCoreKampi.Controllers
         
         public IActionResult BlogListByAuthor()
         {
-            var blog = _bm.GetBlogWithAuthor(3);
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            ViewData["CurrentUser"] = values;
+            var blog = _bm.GetBlogWithAuthor(values.Id);
             return View(blog);
         }
 
         [HttpGet]
         public IActionResult BlogAdd()
         {
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            ViewData["CurrentUser"] = values;
+
 
             // Burada kategory listesi cekildi ve cekilen catgory listesi viewbag verildi
-            List<SelectListItem> categoryList = (from item in _cm.GetList()
+            var categoryList = (from item in _cm.GetList()
                 select new SelectListItem
                 {
                     Text = item.Name,
@@ -69,7 +77,7 @@ namespace AspNetCoreKampi.Controllers
         {
             _vr = _bv.Validate(entity);
 
-            List<SelectListItem> categoryList = (from item in _cm.GetList()
+            var categoryList = (from item in _cm.GetList()
                 select new SelectListItem
                 {
                     Text = item.Name,
@@ -80,8 +88,11 @@ namespace AspNetCoreKampi.Controllers
 
             if (_vr.IsValid)
             {
+                var authorMail = User.Identity?.Name;
+                var values = AuthorId.Id(authorMail);
+                ViewData["CurrentUser"] = values;
                 entity.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                entity.AuthorId = 3;
+                entity.AuthorId = values.Id;
                 entity.Status = true;
 
                 // Ekleme işlemi yapıldığı zaman Tempdata ya mesaj verildi
@@ -101,6 +112,7 @@ namespace AspNetCoreKampi.Controllers
 
         public IActionResult Status(int id)
         {
+
             var entity = _bm.GetById(id);
             entity.Status = !entity.Status;
             _bm.Update(entity);
@@ -119,6 +131,10 @@ namespace AspNetCoreKampi.Controllers
         [HttpGet]
         public IActionResult BlogUpdate(int id)
         {
+
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            ViewData["CurrentUser"] = values;
             List<SelectListItem> categoryList = (from item in _cm.GetList()
                 select new SelectListItem
                 {
@@ -147,8 +163,11 @@ namespace AspNetCoreKampi.Controllers
             _vr = _bv.Validate(entity);
             if (_vr.IsValid)
             {
+                var authorMail = User.Identity?.Name;
+                var values = AuthorId.Id(authorMail);
+                ViewData["CurrentUser"] = values;
                 entity.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                entity.AuthorId = 3;
+                entity.AuthorId =values.Id;
                 entity.Status = true;
                 TempData["Alert"] = "Blog başarılı bir şekilde güncellendi.";
                 _bm.Update(entity);

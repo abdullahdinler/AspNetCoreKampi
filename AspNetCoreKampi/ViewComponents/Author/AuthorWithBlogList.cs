@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreKampi.Models;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,9 @@ namespace AspNetCoreKampi.ViewComponents.Author
 
         public IViewComponentResult Invoke()
         {
-            var result = _bm.GetBlogWithAuthor(3);
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            var result = _bm.GetBlogWithAuthor(values.Id);
             return View(result);
         }
     }

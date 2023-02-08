@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreKampi.Models;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,9 @@ namespace AspNetCoreKampi.ViewComponents.Dashboard
         private readonly BlogManager _bm = new BlogManager(new EfBlogDal());
         public IViewComponentResult Invoke()
         {
-            var blogList = _bm.GetBlogWithCategory().Where(x=>x.AuthorId == 3).OrderByDescending(x => x.Id).Take(5).ToList();
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            var blogList = _bm.GetBlogWithCategory().Where(x=>x.AuthorId == values.Id).OrderByDescending(x => x.Id).Take(5).ToList();
             return View(blogList);
         }
     }

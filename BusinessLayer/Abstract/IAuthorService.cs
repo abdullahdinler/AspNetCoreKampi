@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
     public interface IAuthorService:IGenericService<Author>
     {
         Author AuthorLogin(string mail,string password);
+        int GetMailById(string mail);
     }
 }

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MessageTwo>
+@{
+    ViewData["Title"] = "InBox";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                Bloglarım
+            </h4>
+            <div class="text-right">
+                <a class="btn btn-outline-success " href="/Blog/BlogAdd/">New A Message</a>
+            </div>
+            <p class="card-description">
+            </p>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Subject</th>
+                        <th>Sender</th>
+                        <th>Date</th>
+                        <th class="text-right"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Subject</td>
+                        <td>@item.SenderUser.Name</td>
+                        <td> @item.MessageDateTime.Zaman()</td>
+                        <td class="text-right"> <a href="/Message/MessageDetail/@item.Id" class="btn btn-outline-warning ">Message Open</a> </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreKampi.Models;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
@@ -14,22 +15,27 @@ using Microsoft.AspNetCore.Http;
 
 namespace AspNetCoreKampi.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class AuthorController : Controller
     {
         private readonly AuthorManager _author = new AuthorManager(new EfAuthorDal());
         private readonly AuthorValidator _validator = new AuthorValidator();
         private ValidationResult _vr;
+
         public IActionResult Index()
         {
-            var values = _author.GetById(3);
+           
+            // hakan@babus.com Hakanbabus34
+            var authorMail = User.Identity?.Name;
+            var values = AuthorId.Id(authorMail);
+            ViewData["CurrentUser"] = values;
             return View(values);
         }
 
         [HttpGet]
-        public IActionResult ProfileEdit()
+        public IActionResult ProfileEdit(int id)
         {
-            var values = _author.GetById(3);
+            var values = _author.GetById(id);
             return View(values);
         }
 

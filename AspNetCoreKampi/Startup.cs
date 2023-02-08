@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreKampi.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AspNetCoreKampi
@@ -27,6 +28,7 @@ namespace AspNetCoreKampi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
 
             // Global bir filtreleme iþlemi yapýldý
             services.AddMvc(confing =>
