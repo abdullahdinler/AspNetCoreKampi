@@ -24,8 +24,6 @@ namespace AspNetCoreKampi.Controllers
 
         public IActionResult Index()
         {
-           
-            // hakan@babus.com Hakanbabus34
             var authorMail = User.Identity?.Name;
             var values = AuthorId.Id(authorMail);
             ViewData["CurrentUser"] = values;
