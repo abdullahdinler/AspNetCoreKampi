@@ -11,6 +11,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreKampi.Models;
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AspNetCoreKampi
@@ -25,9 +33,22 @@ namespace AspNetCoreKampi
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // Fluent Validation controle ekledik ve dependancy injection kullandýk
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AdminValidator>());
+            services.AddScoped<IValidator<Admin>, AdminValidator>();
+
+
+            // Admin bussiner ve Data Access kýsmý için dependancy injection kullandýk
+            services.AddScoped<IAdminService, AdminManager>();
+            services.AddScoped<IAdminDal, EfAdminDal>();
+            services.AddScoped<AdminManager>();
+
 
 
             // Global bir filtreleme iþlemi yapýldý

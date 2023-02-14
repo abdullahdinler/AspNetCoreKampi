@@ -50,5 +50,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<MessageTwo> MessageTwos { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 }
