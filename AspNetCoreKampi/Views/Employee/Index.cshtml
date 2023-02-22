@@ -1,0 +1,26 @@
+﻿@using AspNetCoreKampi.Controllers
+@model List<EmployeeClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Employe List</h1>
+<br />
+<a asp-controller="Employee" asp-action="EmployeeAdd" class="btn btn-success">New Employee</a>
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td><a asp-controller="Employee" asp-action="DeleteEmployee" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+                <td><a asp-controller="Employee" asp-action="EditEmploye" asp-route-id="@item.Id" class="btn btn-warning">Update</a></td>
+            </tr>
+        }
+    </table>
+

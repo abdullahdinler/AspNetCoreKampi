@@ -1,0 +1,14 @@
+﻿@using AspNetCoreKampi.Controllers
+@model EmployeeClass
+@{
+    ViewData["Title"] = "EmployeeAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EmployeeAdd</h1>
+<form asp-controller="Employee" asp-action="EmployeeAdd" method="post">
+    <input asp-for="Name"  class="form-control"/>
+    <br />
+    <button type="submit" class="btn btn-success">Employee Added</button>
+</form>
+
