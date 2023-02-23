@@ -15,6 +15,7 @@ using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation;
@@ -36,6 +37,11 @@ namespace AspNetCoreKampi
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            // Burada containera Identityi ekledik.
+            services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+
+
             services.AddControllersWithViews();
 
             // Fluent Validation controle ekledik ve dependancy injection kullandýk
