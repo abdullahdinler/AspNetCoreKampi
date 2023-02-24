@@ -24,31 +24,33 @@
 
 <body class="gray-bg">
 
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
     <div class="middle-box text-center loginscreen   animated fadeInDown">
         <div>
-            
+
             <h3>Yazar Kayıt Sayfası</h3>
             <p>Yeni bir hesap oluştur.</p>
             <form class="m-t" role="form" asp-controller="RegisterUser" asp-action="Index" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="NameSurname" required="">
-                    <span asp-validation-for="NameSurname" class="text-success"></span>
+                    <span asp-validation-for="NameSurname" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Kullanıcı Adınız" asp-for="UserName" required="">
-                    <span asp-validation-for="UserName" class="text-success"></span>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email" asp-for="Mail" required="">
-                    <span asp-validation-for="Mail" class="text-success"></span>
+                    <span asp-validation-for="Mail" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input class="form-control" placeholder="Sifre" asp-for="Password" required="">
-                    <span asp-validation-for="Password" class="text-success"></span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input class="form-control" placeholder="Sifreyi Tekrar Giriniz" asp-for="ConfirmPassword" required="">
-                    <span asp-validation-for="ConfirmPassword" class="text-success"></span>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <div class="checkbox i-checks"><label> <input type="checkbox" required=""><i></i> Şartları ve politikayı kabul edin </label></div>
@@ -63,17 +65,22 @@
     </div>
 
     <!-- Mainly scripts -->
+
     <script src="/AdminPanel/js/jquery-3.1.1.min.js"></script>
     <script src="/AdminPanel/js/popper.min.js"></script>
     <script src="/AdminPanel/js/bootstrap.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <!-- iCheck -->
     <script src="/AdminPanel/js/plugins/iCheck/icheck.min.js"></script>
-    <script>$(document).ready(function(){
+    <script>
+        $(document).ready(function () {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',
             });
         });</script>
+
 </body>
 
 </html>

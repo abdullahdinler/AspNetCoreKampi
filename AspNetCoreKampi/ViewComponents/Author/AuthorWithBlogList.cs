@@ -17,7 +17,7 @@ namespace AspNetCoreKampi.ViewComponents.Author
         {
             var authorMail = User.Identity?.Name;
             var values = AuthorId.Id(authorMail);
-            var result = _bm.GetBlogWithAuthor(values.Id);
+            var result = _bm.GetBlogWithAuthor(3);
             return View(result);
         }
     }

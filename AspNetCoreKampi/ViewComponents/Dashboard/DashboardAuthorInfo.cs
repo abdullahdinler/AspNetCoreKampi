@@ -16,7 +16,7 @@ namespace AspNetCoreKampi.ViewComponents.Dashboard
         {
             var authorMail = User.Identity?.Name;
             var values = AuthorId.Id(authorMail);
-            var result = _author.GetList(values.Id);
+            var result = _author.GetList(3);
             return View(result);
         }
 

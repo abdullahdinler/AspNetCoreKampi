@@ -16,7 +16,7 @@ namespace AspNetCoreKampi.ViewComponents.Dashboard
         {
             var authorMail = User.Identity?.Name;
             var values = AuthorId.Id(authorMail);
-            var blogList = _bm.GetBlogWithCategory().Where(x=>x.AuthorId == values.Id).OrderByDescending(x => x.Id).Take(5).ToList();
+            var blogList = _bm.GetBlogWithCategory().Where(x=>x.AuthorId == 3).OrderByDescending(x => x.Id).Take(5).ToList();
             return View(blogList);
         }
     }
