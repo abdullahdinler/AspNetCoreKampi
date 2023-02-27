@@ -10,16 +10,18 @@ using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreKampi.Controllers
 {
-    [AllowAnonymous]
+    
     public class LoginUserController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
+       
 
-        public LoginUserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+        public LoginUserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IdentityUserRole<int> userRole)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            
         }
 
         
@@ -33,22 +35,26 @@ namespace AspNetCoreKampi.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Index(UserSignInViewModel entity)
         {
-             
+          
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(entity.UserName, entity.Password, false, true);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByNameAsync(User.Identity?.Name);
                     return RedirectToAction("LoginGirisSayfasi", "LoginUser");
                 }
                 else

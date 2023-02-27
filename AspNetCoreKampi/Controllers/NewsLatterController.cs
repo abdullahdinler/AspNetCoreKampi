@@ -8,18 +8,20 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreKampi.Controllers
 {
+    [AllowAnonymous]
     public class NewsLatterController : Controller
     {
-        private readonly NewsLatterManager _nlm = new NewsLatterManager(new EfNewsLatterDal());
-        private readonly NewsLatterValidator _nlv = new NewsLatterValidator();
+        private readonly NewsLatterManager _nlm = new(new EfNewsLatterDal());
+        private readonly NewsLatterValidator _nlv = new();
         private ValidationResult _vr;
 
 
         [HttpPost]
-        public JsonResult Index(NewsLetter entity)
+        public IActionResult Index(NewsLetter entity)
         {
             _vr = _nlv.Validate(entity);
             if (_vr.IsValid)
