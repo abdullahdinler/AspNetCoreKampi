@@ -1,0 +1,27 @@
+﻿@using AspNetCoreKampi.ViewModels
+@model ProfileUpdateViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Güncelleme Sayfası</h1>
+
+<form method="post">
+    <label>User Name</label>
+    <input class="form-control" type="text" asp-for="userName" />
+    <br />
+    <label>Name Surname</label>
+    <input class="form-control" type="text" asp-for="nameSurname" />
+    <br />
+    <label>Email</label>
+    <input class="form-control" type="text" asp-for="mail" />
+    <br />
+    <label>Current Password</label>
+    <input class="form-control" type="text" asp-for="Password" />
+    <br />
+    <label>New Password</label>
+    <input class="form-control" type="text" asp-for="PasswordAgain" />
+    <br />
+    <button type="submit" class="btn btn-secondary">Updated</button>
+</form>

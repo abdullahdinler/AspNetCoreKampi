@@ -17,7 +17,7 @@ namespace AspNetCoreKampi.Controllers
         private readonly UserManager<AppUser> _userManager;
        
 
-        public LoginUserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IdentityUserRole<int> userRole)
+        public LoginUserController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -29,6 +29,8 @@ namespace AspNetCoreKampi.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity?.Name);
             ViewBag.User = user;
+            ViewBag.Name = user.NameSurname;
+            ViewBag.Password = user.PasswordHash;
             var userId = await _userManager.GetUserIdAsync(user);
             ViewBag.UserId = userId;
             return View();
@@ -54,7 +56,7 @@ namespace AspNetCoreKampi.Controllers
                 var result = await _signInManager.PasswordSignInAsync(entity.UserName, entity.Password, false, true);
                 if (result.Succeeded)
                 {
-                    var user = await _userManager.FindByNameAsync(User.Identity?.Name);
+                    
                     return RedirectToAction("LoginGirisSayfasi", "LoginUser");
                 }
                 else
