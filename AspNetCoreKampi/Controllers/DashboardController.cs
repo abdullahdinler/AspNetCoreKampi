@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreKampi.Controllers
 {
-    
+    [AllowAnonymous]
     public class DashboardController : Controller
     {
         private readonly BlogManager _blog = new BlogManager(new EfBlogDal());

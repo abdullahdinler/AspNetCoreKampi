@@ -17,7 +17,7 @@ namespace AspNetCoreKampi.Controllers
     [AllowAnonymous]
     public class AuthorLoginController : Controller
     {
-        readonly AuthorManager _author = new AuthorManager(new EfAuthorDal());
+       private readonly AuthorManager _author = new(new EfAuthorDal());
 
         [HttpGet]
         public IActionResult Index()

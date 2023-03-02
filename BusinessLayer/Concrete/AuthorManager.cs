@@ -29,7 +29,7 @@ namespace BusinessLayer.Concrete
 
         public Author AuthorLogin(string mail, string password)
         {
-            var result = _author.List(x => x.Mail == mail && x.Password == password).FirstOrDefault();
+            var result = _author.List().FirstOrDefault(x => x.Mail == mail && x.Password == password);
             return result;
         }
 

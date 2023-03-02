@@ -57,7 +57,7 @@ namespace AspNetCoreKampi.Controllers
                 if (result.Succeeded)
                 {
                     
-                    return RedirectToAction("LoginGirisSayfasi", "LoginUser");
+                    return RedirectToAction("InBox", "Messages");
                 }
                 else
                 {
