@@ -71,19 +71,19 @@
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Refresh inbox"><i class="fa fa-refresh"></i> Yenile</button>
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read"><i class="fa fa-eye"></i> </button>
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as important"><i class="fa fa-exclamation"></i> </button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+                    <button id="deleteSelected" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>
 
                 </div>
             </div>
             <div class="mail-box">
-
-                <table class="table table-hover table-mail">
-                    <tbody>
+                <form method="post">
+                    <table class="table table-hover table-mail">
+                        <tbody>
                         @foreach (var item in Model)
                         {
                             <tr class="unread">
                                 <td class="check-mail">
-                                    <input type="checkbox" class="i-checks">
+                                    <input type="checkbox" name="ids" value="@item.Id" class="i-checks">
                                 </td>
                                 <td class="mail-ontact"><a href="mail_detail.html">@item.SenderUser.Name</a></td>
                                 <td class="mail-subject"><a href="mail_detail.html">@item.Subject</a></td>
@@ -91,14 +91,43 @@
                                 <td class="text-right mail-date">@item.MessageDateTime.ToString("d")</td>
                             </tr>
                         }
-                   
-                    </tbody>
-                </table>
 
+                        </tbody>
+                    </table>
+                </form>
 
             </div>
         </div>
     </div>
 </div>
+@section Scripts
+{
+    <script>
+    $(document).ready(function () {
+        $('#deleteSelected').click(function () {
+            var ids = $('input[name="ids"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+
+            if (ids.length == 0) {
+                alert("Please select at least one message to delete.");
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Delete", "Messages")',
+                data: { ids: ids },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                    alert("An error occurred while deleting the selected messages.");
+                }
+            });
+        });
+    });
+    </script>
+}
 
 

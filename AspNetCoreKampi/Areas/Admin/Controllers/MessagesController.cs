@@ -25,24 +25,47 @@ namespace AspNetCoreKampi.Areas.Admin.Controllers
 
         public async Task<IActionResult> InBox()
         {
+            
             var user = await _userManager.FindByNameAsync(User.Identity?.Name);
-            if (user == null) return View();
-            var userId = await _userManager.GetUserIdAsync(user);
-          var model =  _manager.GetByAuthorMessage(int.Parse(userId));
+            var model = _manager.GetByAuthorMessage(user.Id);
             return View(model);
         }
 
         [HttpGet]
-        public async Task<IActionResult> NewMessage()
+        public IActionResult NewMessage()
         {
-            return View();
+            // Burada tuple kullanarak hem mesaj sınıfını hemde appuser sınıfını model olarak gonderdik
+            var model = Tuple.Create<MessageTwo, AppUser>(new MessageTwo(), new AppUser());
+            return View(model);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> NewMessage(MessageTwo message)
+        public async Task<IActionResult> NewMessage([Bind(Prefix = "item1")] MessageTwo message,
+            [Bind(Prefix = "item2")] AppUser appUser)
         {
-            return View();
+            if (User.Identity == null) return View();
+            var sender = await _userManager.FindByNameAsync(User.Identity.Name);
+            var receiver = await _userManager.FindByNameAsync(appUser.Email);
+            message.SenderId = sender.Id;
+            message.ReceiverId = receiver.Id;
+            message.MessageDateTime = DateTime.Parse(DateTime.Now.ToShortDateString());
+            message.Status = true;
+            _manager.Add(message);
+            return RedirectToAction("InBox");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int[] ids)
+        {
+            foreach (var id in ids)
+            {
+                var message = _manager.GetById(id);
+                _manager.Delete(message);
+            }
+            return RedirectToAction(nameof(InBox));
+        }
+
+        
     }
 }
