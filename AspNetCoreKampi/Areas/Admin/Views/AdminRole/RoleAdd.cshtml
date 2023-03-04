@@ -1,0 +1,19 @@
+﻿@model AspNetCoreKampi.ViewModels.RoleViewModel
+@{
+    ViewData["Title"] = "RoleAdd";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>
+    New Role Added Page
+</h1>
+
+<form asp-controller="AdminRole" asp-action="RoleAdd" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Role Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <button class="btn btn-outline-success" type="submit">Added</button>
+</form>
+

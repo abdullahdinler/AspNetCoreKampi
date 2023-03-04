@@ -1,0 +1,20 @@
+﻿@model AspNetCoreKampi.ViewModels.AppRoleUpdateViewModel
+@{
+    ViewData["Title"] = "RoleUpdate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>
+  Role Uptaded Page
+</h1>
+
+<form asp-controller="AdminRole" asp-action="RoleUpdate" method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" value="@Model.Id"/>
+        <label asp-for="Name">Role Name</label>
+        <input type="text" asp-for="Name" class="form-control"/>
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <button class="btn btn-outline-success" type="submit">Uptaded</button>
+</form>
+
