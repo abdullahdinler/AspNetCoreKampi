@@ -135,7 +135,7 @@ namespace AspNetCoreKampi.Areas.Admin.Controllers
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
             var roles = await _roleManager.Roles.ToListAsync();
-            ViewData["userId"] = user.Id;
+            TempData["userId"] = user.Id;
             var userRoles = await _userManager.GetRolesAsync(user);
             List<AssignRoleViewModel> models = new();
             foreach (var role in roles)
@@ -151,6 +151,26 @@ namespace AspNetCoreKampi.Areas.Admin.Controllers
             return View(models);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AssignRole(List<AssignRoleViewModel> model)
+        {
+            var userId = (int) TempData["userId"];
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            foreach (var item in model)
+            {
+                if (item.Exists)
+                {
+                    await _userManager.AddToRoleAsync(user, item.RoleName);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
+                }
+            }
+
+            return RedirectToAction("UserList");
+        }
 
     }
 }

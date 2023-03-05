@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form action="/" method="post">
+<form asp-controller="AdminRole" asp-action="AssignRole" method="post">
     @for (int i = 0; i < Model.Count; i++)
     {
     <div class="form-check">
@@ -14,6 +14,6 @@
         <label class="form-check-label" for="@Model[i].Exists">@Model[i].RoleName</label>
     </div>
     }
-    <button type="submit"> Role Ataması Yap</button>
+    <button type="submit" class="btn btn-dark"> Role Ataması Yap</button>
 </form>
 

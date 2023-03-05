@@ -90,7 +90,7 @@ namespace AspNetCoreKampi
                 options.SlidingExpiration = true;
 
                 // Ýzinsiz giriþ iþlemi yapýlmya calýþtýðý zaman yönlendireleciði sayfa
-                options.AccessDeniedPath = "/Blog/Index";
+                options.AccessDeniedPath = "/Admin/Admin/AccessDenied/";
             });
 
         }
@@ -110,7 +110,7 @@ namespace AspNetCoreKampi
             }
 
             // Error Sayasý Yönlendirme
-            //app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

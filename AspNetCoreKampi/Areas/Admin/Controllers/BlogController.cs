@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AspNetCoreKampi.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Author")]
     public class BlogController : Controller
     {
         private readonly BlogManager _blog = new BlogManager(new EfBlogDal());
